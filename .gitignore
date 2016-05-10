@@ -1,0 +1,47 @@
+
+###### Editor files
+*~
+*.bak
+*.orig
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.usertasks
+*.resources
+*.vs10x
+*_ReSharper.*
+.vs
+
+
+###### Binary files
+[Bb]in
+[Oo]bj
+*.cache
+*.sln.proj
+*.nupkg
+
+
+###### DNX
+#project.lock.json
+artifacts
+
+
+###### Custom NAnt configuration
+/build.conf
+
+
+###### Automatic generated documentation and report files
+doc/generated/*
+doc/reports/*
+
+
+###### Other files
+dep/src/*
+src/packages/*
+NLibuv.snk
+
+
+###### OS generated files
+Thumbs.db
+.DS_Store*

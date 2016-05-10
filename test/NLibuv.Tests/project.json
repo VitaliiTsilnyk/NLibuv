@@ -1,0 +1,67 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "NLibuv.Tests",
+  "authors": [ "Vitaly Zilnik" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "warningsAsErrors": true,
+    "allowUnsafe": true
+  },
+
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": [ "RELEASE" ],
+        "optimize": true
+      }
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-build204",
+
+    "NLibuv": { "target": "project" }
+  },
+
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "Microsoft.CSharp": "",
+        "System": "",
+        "System.Core": "",
+        "System.Data": "",
+        "System.Data.DataSetExtensions": "",
+        "System.Xml": "",
+        "System.Xml.Linq": ""
+      }
+    },
+    "dnxcore50": {
+      "compilationOptions": {
+        "define": [ "DOTNET_CORE" ]
+      },
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-*",
+        "System.Runtime": "4.0.21-*",
+        "System.Runtime.Extensions": "4.0.10-*",
+        "System.Reflection.TypeExtensions": "4.0.0-*",
+        "System.Collections.Concurrent": "4.0.0-*",
+        "System.Threading.Thread": "4.0.0-*",
+        "System.Threading.Timer": "4.0.0-*",
+        "System.Net.Primitives": "4.0.10-*"
+      }
+    }
+  }
+}

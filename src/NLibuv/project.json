@@ -1,0 +1,99 @@
+﻿{
+  "version": "0.2.0-*",
+  "title": "NLibuv",
+  "description": "NLibuv",
+  "authors": [ "Vitaly Zilnik" ],
+  "tags": [ "libuv", "uv", "io", "async" ],
+  "projectUrl": "http://github.com/neris/NLibuv",
+  "licenseUrl": "",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/neris/NLibuv"
+  },
+
+  "compilationOptions": {
+    "languageVersion": "csharp6",
+    "warningsAsErrors": true,
+    "allowUnsafe": true
+  },
+
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": [ "RELEASE" ],
+        "optimize": true
+      }
+    }
+  },
+
+  "packInclude": {
+    "LICENSE": "../../LICENSE"
+  },
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net20": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net35": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net35-client": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net40": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net40-client": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net45": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "net46": {
+      "frameworkAssemblies": {
+        "System": ""
+      }
+    },
+    "dnx451": {
+      "frameworkAssemblies": {
+        "Microsoft.CSharp": "",
+        "System": "",
+        "System.Core": ""
+      }
+    },
+    "dnxcore50": {
+      "compilationOptions": {
+        "define": [ "DOTNET_CORE" ]
+      },
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-*",
+        "System.Runtime": "4.0.21-*",
+        "System.Runtime.Extensions": "4.0.10-*",
+        "System.Reflection.TypeExtensions": "4.0.0-*",
+        "System.Threading.Thread": "4.0.0-*",
+        "System.Net.Primitives": "4.0.10-*"
+      }
+    }
+  }
+}

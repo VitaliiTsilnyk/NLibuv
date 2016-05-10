@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE79D708-CB7E-45E0-960F-B9DE9BE2EF50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{460A9D14-A7AD-484D-A3C7-720B371FF427}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLibuv", "src\NLibuv\NLibuv.xproj", "{CAF65A66-28FF-4709-A34C-B7E267209EED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0E0BC64B-4799-4DC1-ACC0-A1573CA47EF5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLibuv.Tests", "test\NLibuv.Tests\NLibuv.Tests.xproj", "{26DE7C08-B413-4CD1-8527-23D78CADF174}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAF65A66-28FF-4709-A34C-B7E267209EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF65A66-28FF-4709-A34C-B7E267209EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF65A66-28FF-4709-A34C-B7E267209EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF65A66-28FF-4709-A34C-B7E267209EED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DE7C08-B413-4CD1-8527-23D78CADF174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DE7C08-B413-4CD1-8527-23D78CADF174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DE7C08-B413-4CD1-8527-23D78CADF174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DE7C08-B413-4CD1-8527-23D78CADF174}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAF65A66-28FF-4709-A34C-B7E267209EED} = {AE79D708-CB7E-45E0-960F-B9DE9BE2EF50}
+		{26DE7C08-B413-4CD1-8527-23D78CADF174} = {0E0BC64B-4799-4DC1-ACC0-A1573CA47EF5}
+	EndGlobalSection
+EndGlobal
