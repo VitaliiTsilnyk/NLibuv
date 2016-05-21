@@ -3,16 +3,8 @@
   "title": "NLibuv",
   "description": "NLibuv",
   "authors": [ "Vitaly Zilnik" ],
-  "tags": [ "libuv", "uv", "io", "async" ],
-  "projectUrl": "http://github.com/neris/NLibuv",
-  "licenseUrl": "",
 
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/neris/NLibuv"
-  },
-
-  "compilationOptions": {
+  "buildOptions": {
     "languageVersion": "csharp6",
     "warningsAsErrors": true,
     "allowUnsafe": true
@@ -20,20 +12,30 @@
 
   "configurations": {
     "Debug": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "DEBUG", "TRACE" ]
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "RELEASE" ],
         "optimize": true
       }
     }
   },
 
-  "packInclude": {
-    "LICENSE": "../../LICENSE"
+  "packOptions": {
+    "projectUrl": "http://github.com/neris/NLibuv",
+    "licenseUrl": "",
+    "tags": [ "libuv", "uv", "io", "async" ],
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/neris/NLibuv"
+    },
+
+    "files": {
+      "LICENSE": "../../LICENSE"
+    }
   },
 
   "dependencies": {
@@ -75,24 +77,19 @@
         "System": ""
       }
     },
-    "dnx451": {
-      "frameworkAssemblies": {
-        "Microsoft.CSharp": "",
-        "System": "",
-        "System.Core": ""
-      }
-    },
-    "dnxcore50": {
-      "compilationOptions": {
+    "netstandard1.3": {
+      "buildOptions": {
         "define": [ "DOTNET_CORE" ]
       },
       "dependencies": {
         "Microsoft.CSharp": "4.0.1-*",
-        "System.Runtime": "4.0.21-*",
-        "System.Runtime.Extensions": "4.0.10-*",
-        "System.Reflection.TypeExtensions": "4.0.0-*",
+        "System.Collections": "4.0.11-*",
+        "System.Runtime": "4.1.0-*",
+        "System.Runtime.Extensions": "4.1.0-*",
+        "System.Runtime.InteropServices": "4.1.0-*",
+        "System.Reflection.TypeExtensions": "4.1.0-*",
         "System.Threading.Thread": "4.0.0-*",
-        "System.Net.Primitives": "4.0.10-*"
+        "System.Net.Primitives": "4.0.11-*"
       }
     }
   }
