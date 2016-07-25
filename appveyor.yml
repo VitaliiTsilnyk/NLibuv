@@ -1,0 +1,11 @@
+os: Visual Studio 2015
+
+install:
+  - dotnet restore
+
+build:
+  project: NLibuv.sln
+
+test_script:
+  - cd test\NLibuv.Tests
+  - dotnet restore && dotnet build && dotnet test
