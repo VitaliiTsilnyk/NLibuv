@@ -42,54 +42,19 @@
   },
 
   "frameworks": {
-    "net20": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net35": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net35-client": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net40": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net40-client": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net45": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
-    "net46": {
-      "frameworkAssemblies": {
-        "System": ""
-      }
-    },
     "netstandard1.3": {
       "buildOptions": {
         "define": [ "DOTNET_CORE" ]
       },
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-*",
-        "System.Collections": "4.0.11-*",
-        "System.Runtime": "4.1.0-*",
-        "System.Runtime.Extensions": "4.1.0-*",
-        "System.Runtime.InteropServices": "4.1.0-*",
-        "System.Reflection.TypeExtensions": "4.1.0-*",
-        "System.Threading.Thread": "4.0.0-*",
-        "System.Net.Primitives": "4.0.11-*"
+        "Microsoft.CSharp": "4.0.1",
+        "System.Collections": "4.0.11",
+        "System.Runtime": "4.1.0",
+        "System.Runtime.Extensions": "4.1.0",
+        "System.Runtime.InteropServices": "4.1.0",
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.Threading.Thread": "4.0.0",
+        "System.Net.Primitives": "4.0.11"
       }
     }
   }
