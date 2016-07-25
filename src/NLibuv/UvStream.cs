@@ -63,7 +63,7 @@ namespace NLibuv
 
 		/// <summary>
 		/// Starts reading data from an incoming stream.
-		/// The <see cref="readCallback"/> will be executed several times until the stream closes or <see cref="ReadStop"/> method is called.
+		/// The <paramref name="readCallback"/> will be executed several times until the stream closes or <see cref="ReadStop"/> method is called.
 		/// </summary>
 		/// <param name="allocCallback">Allocation callback.</param>
 		/// <param name="readCallback">Read callback.</param>
