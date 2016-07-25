@@ -1,13 +1,15 @@
 ﻿{
   "version": "0.2.0-*",
   "title": "NLibuv",
-  "description": "NLibuv",
+  "description": "A cross-platform bindings to the libuv library for .NET.",
   "authors": [ "Vitaly Zilnik" ],
 
   "buildOptions": {
     "languageVersion": "csharp6",
     "warningsAsErrors": true,
-    "allowUnsafe": true
+    "allowUnsafe": true,
+    "xmlDoc": true,
+    "nowarn": [ "CS1591" ]
   },
 
   "configurations": {
@@ -26,7 +28,8 @@
 
   "packOptions": {
     "projectUrl": "http://github.com/neris/NLibuv",
-    "licenseUrl": "",
+    "licenseUrl": "https://raw.githubusercontent.com/neris/NLibuv/master/LICENSE",
+    "requireLicenseAcceptance": false,
     "tags": [ "libuv", "uv", "io", "async" ],
     "repository": {
       "type": "git",
@@ -34,7 +37,9 @@
     },
 
     "files": {
-      "LICENSE": "../../LICENSE"
+      "mappings": {
+        "LICENSE": "../../LICENSE"
+      }
     }
   },
 
