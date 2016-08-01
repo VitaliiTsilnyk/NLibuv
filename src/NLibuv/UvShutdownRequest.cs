@@ -12,9 +12,9 @@ namespace NLibuv
 		/// Callback type.
 		/// </summary>
 		/// <param name="request"></param>
-		/// <param name="status"></param>
+		/// <param name="error"></param>
 		/// <param name="state"></param>
-		public delegate void CallbackDelegate(UvShutdownRequest request, int status, object state);
+		public delegate void CallbackDelegate(UvShutdownRequest request, Exception error, object state);
 
 		/// <summary>
 		/// The callback to be called after the request finish.
@@ -71,7 +71,7 @@ namespace NLibuv
 
 			if (callback != null)
 			{
-				callback.Invoke(request, status, state);
+				callback.Invoke(request, error, state);
 			}
 
 			request.Close();

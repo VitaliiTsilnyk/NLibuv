@@ -65,14 +65,14 @@ namespace NLibuv
 		/// <summary>
 		/// Extended write function for sending handles over a pipe. The pipe must be initialized with an IPC option.
 		/// </summary>
-		/// <param name="sendHandle"></param>
+		/// <param name="handleToSend"></param>
 		/// <param name="callback"></param>
 		/// <param name="state"></param>
-		public void WriteHandle(UvStream sendHandle, UvWriteRequest.CallbackDelegate callback, object state)
+		public void WriteHandle(UvStream handleToSend, UvWriteRequest.CallbackDelegate callback, object state = null)
 		{
 			this.EnsureCallingThread();
 
-			var request = new UvWriteHandleRequest(this, sendHandle, callback, state);
+			var request = new UvWriteHandleRequest(this, handleToSend, callback, state);
 			request.Write();
 		}
 	}

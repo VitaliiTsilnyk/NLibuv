@@ -41,7 +41,7 @@ namespace NLibuv
 
 		internal override void Write(UvBuffer[] buffers)
 		{
-			Libuv.uv_write2(this, this.BaseHandle, buffers, buffers.Length, this.HandleToSend, _UvWriteCallback);
+			Libuv.EnsureSuccess(Libuv.uv_write2(this, this.BaseHandle, buffers, buffers.Length, this.HandleToSend, _UvWriteCallback));
 			this.Buffers = null;
 			this.HandleToSend = null;
 		}

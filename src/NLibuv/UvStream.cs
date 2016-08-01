@@ -25,8 +25,9 @@ namespace NLibuv
 		/// </summary>
 		/// <param name="stream"></param>
 		/// <param name="nread"></param>
+		/// <param name="error"></param>
 		/// <param name="state"></param>
-		public delegate void ReadCallbackDelegate(UvStream stream, int nread, object state);
+		public delegate void ReadCallbackDelegate(UvStream stream, int nread, Exception error, object state);
 
 		private GCHandle _ReadVitality;
 		private AllocCallbackDelegate _UserAllocCallback;
@@ -181,7 +182,10 @@ namespace NLibuv
 			}
 			stream._PinnedReadHandles.Clear();
 
-			stream._UserReadCallback.Invoke(stream, nread, stream._UserReadState);
+			Exception error;
+			Libuv.CheckStatusCode(nread, out error);
+
+			stream._UserReadCallback.Invoke(stream, nread, error, stream._UserReadState);
 		}
 	}
 }

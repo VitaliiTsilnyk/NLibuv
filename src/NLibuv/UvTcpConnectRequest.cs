@@ -13,10 +13,9 @@ namespace NLibuv
 		/// Callback type.
 		/// </summary>
 		/// <param name="request"></param>
-		/// <param name="status"></param>
 		/// <param name="error"></param>
 		/// <param name="state"></param>
-		public delegate void CallbackDelegate(UvTcpConnectRequest request, int status, Exception error, object state);
+		public delegate void CallbackDelegate(UvTcpConnectRequest request, Exception error, object state);
 
 		/// <summary>
 		/// The target endpoint to connect to.
@@ -83,7 +82,7 @@ namespace NLibuv
 
 			if (callback != null)
 			{
-				callback.Invoke(request, status, error, state);
+				callback.Invoke(request, error, state);
 			}
 
 			request.Close();

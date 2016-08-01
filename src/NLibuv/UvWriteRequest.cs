@@ -14,9 +14,9 @@ namespace NLibuv
 		/// Callback type.
 		/// </summary>
 		/// <param name="request"></param>
-		/// <param name="status"></param>
+		/// <param name="error"></param>
 		/// <param name="state"></param>
-		public delegate void CallbackDelegate(UvWriteRequest request, int status, object state);
+		public delegate void CallbackDelegate(UvWriteRequest request, Exception error, object state);
 
 		/// <summary>
 		/// The data to be sent.
@@ -107,7 +107,7 @@ namespace NLibuv
 
 		internal virtual void Write(UvBuffer[] buffers)
 		{
-			Libuv.uv_write(this, this.BaseHandle, buffers, buffers.Length, _UvWriteCallback);
+			Libuv.EnsureSuccess(Libuv.uv_write(this, this.BaseHandle, buffers, buffers.Length, _UvWriteCallback));
 			this.Buffers = null;
 		}
 
@@ -133,7 +133,7 @@ namespace NLibuv
 
 			if (callback != null)
 			{
-				callback.Invoke(request, status, state);
+				callback.Invoke(request, error, state);
 			}
 
 			request.Close();

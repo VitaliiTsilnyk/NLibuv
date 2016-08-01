@@ -12,10 +12,9 @@ namespace NLibuv
 		/// Callback type (uv_connect_cb).
 		/// </summary>
 		/// <param name="request"></param>
-		/// <param name="status"></param>
 		/// <param name="error"></param>
-		/// <param name="state"></param>
-		public delegate void CallbackDelegate(UvPipeConnectRequest request, int status, Exception error, object state);
+		/// <param name="stateObject"></param>
+		public delegate void CallbackDelegate(UvPipeConnectRequest request, Exception error, object stateObject);
 
 		/// <summary>
 		/// The name of the pipe to connect to.
@@ -82,7 +81,7 @@ namespace NLibuv
 
 			if (callback != null)
 			{
-				callback.Invoke(request, status, error, state);
+				callback.Invoke(request, error, state);
 			}
 
 			request.Close();
