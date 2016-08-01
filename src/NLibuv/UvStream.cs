@@ -125,8 +125,8 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 
-			var request = new UvWriteRequest(this, callback, state);
-			request.Write(buffer);
+			var request = new UvWriteRequest(this, buffer, callback, state);
+			request.Write();
 		}
 
 		/// <summary>
@@ -139,8 +139,8 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 
-			var request = new UvWriteRequest(this, callback, state);
-			request.Write(buffers);
+			var request = new UvWriteRequest(this, buffers, callback, state);
+			request.Write();
 		}
 
 

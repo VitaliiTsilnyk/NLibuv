@@ -72,8 +72,8 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 
-			var request = new UvWriteRequest(this, callback, state);
-			request.WriteHandle(sendHandle);
+			var request = new UvWriteHandleRequest(this, sendHandle, callback, state);
+			request.Write();
 		}
 	}
 }

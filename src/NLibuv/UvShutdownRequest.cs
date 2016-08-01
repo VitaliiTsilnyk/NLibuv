@@ -16,8 +16,21 @@ namespace NLibuv
 		/// <param name="state"></param>
 		public delegate void CallbackDelegate(UvShutdownRequest request, int status, object state);
 
-		private CallbackDelegate _Callback;
-		private object _State;
+		/// <summary>
+		/// The callback to be called after the request finish.
+		/// </summary>
+		/// <remarks>
+		/// This field will be cleared before the callback invocation.
+		/// </remarks>
+		protected CallbackDelegate Callback;
+
+		/// <summary>
+		/// The state object to be passed to the callback.
+		/// </summary>
+		/// <remarks>
+		/// This field will be cleared before the callback invocation.
+		/// </remarks>
+		protected object State;
 
 		/// <summary>
 		/// Initializes a new instance of the shutdown request.
@@ -28,8 +41,8 @@ namespace NLibuv
 		public UvShutdownRequest(UvStream baseHandle, CallbackDelegate callback, object state)
 			: base(baseHandle, UvRequestType.Shutdown)
 		{
-			this._Callback = callback;
-			this._State = state;
+			this.Callback = callback;
+			this.State = state;
 		}
 
 		/// <summary>
@@ -47,11 +60,11 @@ namespace NLibuv
 		{
 			var request = FromIntPtr<UvShutdownRequest>(handle);
 
-			var callback = request._Callback;
-			request._Callback = null;
+			var callback = request.Callback;
+			request.Callback = null;
 
-			var state = request._State;
-			request._State = null;
+			var state = request.State;
+			request.State = null;
 
 			Exception error;
 			Libuv.CheckStatusCode(status, out error);
