@@ -9,20 +9,28 @@ namespace NLibuv
 	/// </summary>
 	public class UvCheck : UvHandle
 	{
-		private readonly Action<UvCheck> _CallbackAction;
+		private readonly Action<UvCheck> _Callback;
+		private readonly object _State;
+
+		/// <summary>
+		/// Gets the stored state object.
+		/// </summary>
+		public object State => this._State;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UvCheck"/> handle.
 		/// </summary>
 		/// <param name="loop">Loop, on which this handle will be initialized.</param>
-		/// <param name="callbackAction">Callback, which will be invoked every loop iteration.</param>
-		public UvCheck(UvLoop loop, Action<UvCheck> callbackAction)
+		/// <param name="callback">Callback, which will be invoked every loop iteration.</param>
+		/// <param name="state">A state object to be stored in the handle for later use inside the callback.</param>
+		public UvCheck(UvLoop loop, Action<UvCheck> callback, object state = null)
 			: base(loop, UvHandleType.Check)
 		{
-			if (callbackAction == null)
-				throw new ArgumentNullException(nameof(callbackAction));
+			if (callback == null)
+				throw new ArgumentNullException(nameof(callback));
 
-			this._CallbackAction = callbackAction;
+			this._Callback = callback;
+			this._State = state;
 			Libuv.EnsureSuccess(Libuv.uv_check_init(loop, this));
 			this.NeedsToBeClosed = true;
 		}
@@ -50,7 +58,7 @@ namespace NLibuv
 		private static void _CheckCallback(IntPtr handle)
 		{
 			var check = FromIntPtr<UvCheck>(handle);
-			check._CallbackAction.Invoke(check);
+			check._Callback.Invoke(check);
 		}
 	}
 }
