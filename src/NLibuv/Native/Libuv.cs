@@ -83,7 +83,7 @@ namespace NLibuv.Native
 		public static extern IntPtr uv_req_size(UvRequestType reqType);
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void uv_close(IntPtr handle, UvCloseCallback cb);
+		public static extern void uv_close(UvHandle handle, UvCloseCallback cb);
 
 #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using NLibuv.Native;
+using System.Runtime.InteropServices;
 
 namespace NLibuv
 {
@@ -8,6 +9,8 @@ namespace NLibuv
 	/// </summary>
 	public abstract class UvHandle : UvResourceSafeHandle, IUvHandle
 	{
+		private GCHandle _ClosingHandle;
+
 		/// <inheritdoc/>
 		public UvHandleType HandleType { get; }
 
@@ -31,16 +34,29 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 
-			// Send a close request to the loop. 
-			// Object disposing will be performed inside a callback, which will be executed from the loop.
-			Libuv.uv_close(this.handle, _UvCloseCallback);
+			// Protect the managed object from being collected by GC during closing inside the libuv logic
+			if (!this._ClosingHandle.IsAllocated)
+			{
+				this._ClosingHandle = GCHandle.Alloc(this, GCHandleType.Normal);
+			}
+
+			// Object disposing will be performed inside a callback
+			Libuv.uv_close(this, _UvCloseCallback);
 		}
 
 		private static readonly UvCloseCallback _UvCloseCallback = _CloseCallback;
-		private static void _CloseCallback(IntPtr handle)
+		private static void _CloseCallback(IntPtr handlePtr)
 		{
+			var handle = FromIntPtr<UvHandle>(handlePtr);
+
+			var gcHandle = handle._ClosingHandle;
+			if (gcHandle.IsAllocated)
+			{
+				gcHandle.Free();
+			}
+
 			// Handle was closed, it's safe to dispose it now.
-			FromIntPtr<UvHandle>(handle).Dispose();
+			handle.Dispose();
 		}
 
 
