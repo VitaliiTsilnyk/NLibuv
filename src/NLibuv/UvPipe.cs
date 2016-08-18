@@ -49,6 +49,17 @@ namespace NLibuv
 		}
 
 		/// <summary>
+		/// Set the number of pending pipe instance handles when the pipe server is waiting for connections.
+		/// </summary>
+		/// <param name="count"></param>
+		public void SetPendingInstances(int count)
+		{
+			this.EnsureCallingThread();
+
+			Libuv.uv_pipe_pending_instances(this, count);
+		}
+
+		/// <summary>
 		/// Connect to the Unix domain socket or the named Windows pipe.
 		/// </summary>
 		/// <param name="name"></param>

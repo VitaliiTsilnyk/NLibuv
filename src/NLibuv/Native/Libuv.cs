@@ -250,6 +250,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_pipe_pending_count(UvPipe handle);
 
+		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void uv_pipe_pending_instances(UvPipe handle, int count);
+
 		#endregion
 	}
 }
