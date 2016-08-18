@@ -37,9 +37,22 @@ namespace NLibuv.Native
 		/// <returns>The original status code.</returns>
 		public static int CheckStatusCode(int statusCode, out Exception error)
 		{
-			error = statusCode < 0 
-				? new UvErrorException(statusCode, _GetErrorName(statusCode), _GetErrorDescription(statusCode))
-				: null;
+			error = null;
+			if (statusCode < 0)
+			{
+				var errorName = _GetErrorName(statusCode);
+				var errorCode = _GetErrorCode(errorName);
+				var errorDesc = _GetErrorDescription(statusCode);
+
+				if (UvNetworkErrorException.IsNetworkError(errorCode))
+				{
+					error = new UvNetworkErrorException(statusCode, errorCode, errorName, errorDesc);
+				}
+				else
+				{
+					error = new UvErrorException(statusCode, errorCode, errorName, errorDesc);
+				}
+			}
 
 			return statusCode;
 		}
@@ -56,6 +69,15 @@ namespace NLibuv.Native
 			return ptr == IntPtr.Zero ? null : Marshal.PtrToStringAnsi(ptr);
 		}
 
+		private static UvErrorCode _GetErrorCode(string errorName)
+		{
+			UvErrorCode errorCode;
+			if (Enum.TryParse(errorName, out errorCode))
+			{
+				return errorCode;
+			}
+			return 0;
+		}
 
 
 
