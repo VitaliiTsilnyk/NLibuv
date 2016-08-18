@@ -49,6 +49,17 @@ namespace NLibuv
 		}
 
 		/// <summary>
+		/// Set the number of pending pipe instance handles when the pipe server is waiting for connections.
+		/// </summary>
+		/// <param name="count"></param>
+		public void SetPendingInstances(int count)
+		{
+			this.EnsureCallingThread();
+
+			Libuv.uv_pipe_pending_instances(this, count);
+		}
+
+		/// <summary>
 		/// Connect to the Unix domain socket or the named Windows pipe.
 		/// </summary>
 		/// <param name="name"></param>
@@ -65,15 +76,15 @@ namespace NLibuv
 		/// <summary>
 		/// Extended write function for sending handles over a pipe. The pipe must be initialized with an IPC option.
 		/// </summary>
-		/// <param name="sendHandle"></param>
+		/// <param name="handleToSend"></param>
 		/// <param name="callback"></param>
 		/// <param name="state"></param>
-		public void WriteHandle(UvStream sendHandle, UvWriteRequest.CallbackDelegate callback, object state)
+		public void WriteHandle(UvStream handleToSend, UvWriteRequest.CallbackDelegate callback, object state = null)
 		{
 			this.EnsureCallingThread();
 
-			var request = new UvWriteRequest(this, callback, state);
-			request.WriteHandle(sendHandle);
+			var request = new UvWriteHandleRequest(this, handleToSend, callback, state);
+			request.Write();
 		}
 	}
 }

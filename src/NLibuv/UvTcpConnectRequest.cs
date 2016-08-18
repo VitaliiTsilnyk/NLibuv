@@ -13,14 +13,33 @@ namespace NLibuv
 		/// Callback type.
 		/// </summary>
 		/// <param name="request"></param>
-		/// <param name="status"></param>
 		/// <param name="error"></param>
 		/// <param name="state"></param>
-		public delegate void CallbackDelegate(UvTcpConnectRequest request, int status, Exception error, object state);
+		public delegate void CallbackDelegate(UvTcpConnectRequest request, Exception error, object state);
 
-		private readonly IPEndPoint _EndPoint;
-		private CallbackDelegate _Callback;
-		private object _State;
+		/// <summary>
+		/// The target endpoint to connect to.
+		/// </summary>
+		/// <remarks>
+		/// This field will be cleared before the callback invocation.
+		/// </remarks>
+		protected IPEndPoint EndPoint;
+
+		/// <summary>
+		/// The callback to be called after the request finish.
+		/// </summary>
+		/// <remarks>
+		/// This field will be cleared before the callback invocation.
+		/// </remarks>
+		protected CallbackDelegate Callback;
+
+		/// <summary>
+		/// The state object to be passed to the callback.
+		/// </summary>
+		/// <remarks>
+		/// This field will be cleared before the callback invocation.
+		/// </remarks>
+		protected object State;
 
 		/// <summary>
 		/// Initializes a new instance of the TCP connection request.
@@ -32,9 +51,9 @@ namespace NLibuv
 		public UvTcpConnectRequest(UvTcp baseHandle, IPEndPoint endPoint, CallbackDelegate callback, object state)
 			: base(baseHandle, UvRequestType.Connect)
 		{
-			this._EndPoint = endPoint;
-			this._Callback = callback;
-			this._State = state;
+			this.EndPoint = endPoint;
+			this.Callback = callback;
+			this.State = state;
 		}
 
 		/// <summary>
@@ -42,8 +61,9 @@ namespace NLibuv
 		/// </summary>
 		public void Connect()
 		{
-			var addr = SockAddr.FromIpEndPoint(this._EndPoint);
+			var addr = SockAddr.FromIpEndPoint(this.EndPoint);
 			Libuv.EnsureSuccess(Libuv.uv_tcp_connect(this, this.BaseHandle, ref addr, _UvConnectCallback));
+			this.EndPoint = null;
 		}
 
 		private static readonly UvConnectCallback _UvConnectCallback = _ConnectCallback;
@@ -51,18 +71,18 @@ namespace NLibuv
 		{
 			var request = FromIntPtr<UvTcpConnectRequest>(handle);
 
-			var callback = request._Callback;
-			request._Callback = null;
+			var callback = request.Callback;
+			request.Callback = null;
 
-			var state = request._State;
-			request._State = null;
+			var state = request.State;
+			request.State = null;
 
 			Exception error;
 			Libuv.CheckStatusCode(status, out error);
 
 			if (callback != null)
 			{
-				callback.Invoke(request, status, error, state);
+				callback.Invoke(request, error, state);
 			}
 
 			request.Close();

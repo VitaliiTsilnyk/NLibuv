@@ -12,11 +12,10 @@ namespace NLibuv
 		/// <summary>
 		/// Listen callback type (uv_connection_cb).
 		/// </summary>
-		/// <param name="stream"></param>
-		/// <param name="status"></param>
+		/// <param name="server"></param>
 		/// <param name="error"></param>
-		/// <param name="state"></param>
-		public delegate void ListenCallbackDelegate(UvNetworkStream stream, int status, Exception error, object state);
+		/// <param name="stateObject">A state object to be passed to the callback.</param>
+		public delegate void ListenCallbackDelegate(UvNetworkStream server, Exception error, object stateObject);
 
 		private GCHandle _ListenVitality;
 		private ListenCallbackDelegate _UserListenCallback;
@@ -41,11 +40,11 @@ namespace NLibuv
 		/// This call is used in conjunction with <see cref="Listen"/> to accept incoming connections.
 		/// Call this function after receiving a <see cref="ListenCallbackDelegate"/> to accept the connection.
 		/// </summary>
-		/// <param name="streamHandle"></param>
-		public void Accept(UvStream streamHandle)
+		/// <param name="client"></param>
+		public void Accept(UvStream client)
 		{
 			this.EnsureCallingThread();
-			Libuv.EnsureSuccess(Libuv.uv_accept(this, streamHandle));
+			Libuv.EnsureSuccess(Libuv.uv_accept(this, client));
 		}
 
 		/// <summary>
@@ -90,7 +89,7 @@ namespace NLibuv
 			Exception error;
 			Libuv.CheckStatusCode(status, out error);
 
-			stream._UserListenCallback.Invoke(stream, status, error, stream._UserListenState);
+			stream._UserListenCallback.Invoke(stream, error, stream._UserListenState);
 		}
 	}
 }

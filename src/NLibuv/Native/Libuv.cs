@@ -37,9 +37,22 @@ namespace NLibuv.Native
 		/// <returns>The original status code.</returns>
 		public static int CheckStatusCode(int statusCode, out Exception error)
 		{
-			error = statusCode < 0 
-				? new UvErrorException(statusCode, _GetErrorName(statusCode), _GetErrorDescription(statusCode))
-				: null;
+			error = null;
+			if (statusCode < 0)
+			{
+				var errorName = _GetErrorName(statusCode);
+				var errorCode = _GetErrorCode(errorName);
+				var errorDesc = _GetErrorDescription(statusCode);
+
+				if (UvNetworkErrorException.IsNetworkError(errorCode))
+				{
+					error = new UvNetworkErrorException(statusCode, errorCode, errorName, errorDesc);
+				}
+				else
+				{
+					error = new UvErrorException(statusCode, errorCode, errorName, errorDesc);
+				}
+			}
 
 			return statusCode;
 		}
@@ -56,9 +69,19 @@ namespace NLibuv.Native
 			return ptr == IntPtr.Zero ? null : Marshal.PtrToStringAnsi(ptr);
 		}
 
+		private static UvErrorCode _GetErrorCode(string errorName)
+		{
+			UvErrorCode errorCode;
+			if (Enum.TryParse(errorName, out errorCode))
+			{
+				return errorCode;
+			}
+			return 0;
+		}
 
 
-#region Error handling
+
+		#region Error handling
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr uv_err_name(int err);
@@ -66,9 +89,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern IntPtr uv_strerror(int err);
 
-#endregion
+		#endregion
 
-#region Common
+		#region Common
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern UvBuffer uv_buf_init(IntPtr ptr, int len);
@@ -83,11 +106,12 @@ namespace NLibuv.Native
 		public static extern IntPtr uv_req_size(UvRequestType reqType);
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
-		public static extern void uv_close(IntPtr handle, UvCloseCallback cb);
+		public static extern void uv_close(UvHandle handle, UvCloseCallback cb);
 
-#endregion
 
-#region Loop
+		#endregion
+
+		#region Loop
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_loop_init(UvLoop handle);
@@ -101,9 +125,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern void uv_stop(UvLoop handle);
 
-#endregion
+		#endregion
 
-#region Prepare
+		#region Prepare
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_prepare_init(UvLoop loop, UvPrepare idle);
@@ -114,9 +138,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_prepare_stop(UvPrepare idle);
 
-#endregion
+		#endregion
 
-#region Check
+		#region Check
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_check_init(UvLoop loop, UvCheck idle);
@@ -127,9 +151,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_check_stop(UvCheck idle);
 
-#endregion
+		#endregion
 
-#region Idle
+		#region Idle
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_idle_init(UvLoop loop, UvIdle idle);
@@ -140,9 +164,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_idle_stop(UvIdle idle);
 
-#endregion
+		#endregion
 
-#region Async
+		#region Async
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_async_init(UvLoop loop, UvAsync handle, UvAsyncCallback cb);
@@ -150,9 +174,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_async_send(UvAsync handle);
 
-#endregion
+		#endregion
 
-#region Stream
+		#region Stream
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_shutdown(UvShutdownRequest req, UvStream handle, UvShutdownCallback cb);
@@ -169,9 +193,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_write2(UvWriteRequest req, UvStream handle, UvBuffer[] bufs, int nbufs, UvStream sendHandle, UvWriteCallback cb);
 
-#endregion
+		#endregion
 
-#region Network Common
+		#region Network Common
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_listen(UvNetworkStream handle, int backlog, UvConnectionCallback cb);
@@ -185,9 +209,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_ip6_addr(string ip, int port, out SockAddr addr);
 
-#endregion
+		#endregion
 
-#region TCP
+		#region TCP
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_tcp_init(UvLoop loop, UvTcp handle);
@@ -210,9 +234,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_tcp_getpeername(UvTcp handle, out SockAddr name, ref int namelen);
 
-#endregion
+		#endregion
 
-#region Pipe
+		#region Pipe
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_pipe_init(UvLoop loop, UvPipe handle, int ipc);
@@ -226,6 +250,9 @@ namespace NLibuv.Native
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_pipe_pending_count(UvPipe handle);
 
-#endregion
+		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern void uv_pipe_pending_instances(UvPipe handle, int count);
+
+		#endregion
 	}
 }
