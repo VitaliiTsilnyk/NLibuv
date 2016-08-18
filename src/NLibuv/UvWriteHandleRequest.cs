@@ -12,7 +12,7 @@ namespace NLibuv
 		/// The message to be passed to uv_write2 because it must be non-zero-length,
 		/// but it has no other functional significance.
 		/// </summary>
-		private static readonly ArraySegment<byte>[] _DummyMessage = new[] { new ArraySegment<byte>(new byte[] { 1, 2, 3, 4 }) };
+		private static readonly ArraySegment<byte>[] _DummyMessage = new[] { new ArraySegment<byte>(new byte[] { 1 }) };
 
 		/// <summary>
 		/// The handle to be sent.

@@ -10,6 +10,7 @@ namespace NLibuv
 	public abstract class UvResourceSafeHandle : SafeHandle
 	{
 		private readonly GCHandle _GcHandle;
+		private bool _IsClosed;
 
 
 		/// <inheritdoc/>
@@ -23,7 +24,7 @@ namespace NLibuv
 		/// <summary>
 		/// Indicates whenever current handle was properly closed or not.
 		/// </summary>
-		public new bool IsClosed { get; private set; }
+		public new bool IsClosed => this._IsClosed;
 
 		/// <summary>
 		/// Indicates whenever this resource handle needs to be explicitly closed before destroying.
@@ -61,7 +62,7 @@ namespace NLibuv
 			var ptr = this.handle;
 			if (ptr != IntPtr.Zero)
 			{
-				if (this.NeedsToBeClosed && !this.IsClosed)
+				if (this.NeedsToBeClosed && !this._IsClosed)
 				{
 					throw new UvException($"UvHandle '{this.GetType().FullName}' wasn't properly closed before disposing. Please ensure that you called the Close method.");
 				}
@@ -90,9 +91,9 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 
-			if (this.IsClosed)
+			if (this._IsClosed)
 				return;
-			this.IsClosed = true;
+			this._IsClosed = true;
 			
 			this.CloseHandle();
 		}
