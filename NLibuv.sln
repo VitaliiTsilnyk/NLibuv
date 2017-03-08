@@ -1,21 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE79D708-CB7E-45E0-960F-B9DE9BE2EF50}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{460A9D14-A7AD-484D-A3C7-720B371FF427}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLibuv", "src\NLibuv\NLibuv.xproj", "{CAF65A66-28FF-4709-A34C-B7E267209EED}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0E0BC64B-4799-4DC1-ACC0-A1573CA47EF5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLibuv.Tests", "test\NLibuv.Tests\NLibuv.Tests.xproj", "{26DE7C08-B413-4CD1-8527-23D78CADF174}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLibuv", "src\NLibuv\NLibuv.csproj", "{CAF65A66-28FF-4709-A34C-B7E267209EED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLibuv.Tests", "test\NLibuv.Tests\NLibuv.Tests.csproj", "{26DE7C08-B413-4CD1-8527-23D78CADF174}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
