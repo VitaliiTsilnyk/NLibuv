@@ -3,7 +3,6 @@
 #
 
 dist: trusty
-language: csharp
 sudo: required
 
 addons:
@@ -11,14 +10,11 @@ addons:
     packages:
     - libunwind8
 
-mono:
-  - 4.2.1
-
 install:
- - curl -sSL https://raw.githubusercontent.com/dotnet/cli/rel/1.0.0-preview2/scripts/obtain/dotnet-install.sh | bash /dev/stdin --version 1.0.0-preview2-003121 --install-dir ~/dotnet
- - sudo ln -s ~/dotnet/dotnet /usr/local/bin
-
-solution: NLibuv.sln
+ - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+ - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+ - sudo apt-get update
+ - sudo apt-get install dotnet-dev-1.0.1
 
 script:
   - dotnet restore
