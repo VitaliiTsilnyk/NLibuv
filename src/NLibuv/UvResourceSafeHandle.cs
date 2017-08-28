@@ -83,7 +83,7 @@ namespace NLibuv
 		/// <summary>
 		/// Properly closes a handle or request and ensures that current object will be disposed correctly.
 		/// </summary>
-#if DOTNET_CORE
+#if NETSTANDARD1_3
 		public void Close()
 #else
 		public new void Close()
