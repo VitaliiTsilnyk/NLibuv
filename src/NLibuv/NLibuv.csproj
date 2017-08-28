@@ -30,4 +30,8 @@
     <DefineConstants>$(DefineConstants);DOTNET_CORE</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Libuv" Version="1.10.0" />
+  </ItemGroup>
+
 </Project>
