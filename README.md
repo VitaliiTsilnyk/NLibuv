@@ -35,11 +35,10 @@ from the package manager console:
 ```
 PM> Install-Package NLibuv
 ```
-Or add the `NLibuv` dependency to your `project.json` file.
-
-### Prerequisites
-
- * This package requires the [libuv library](http://libuv.org/) installed in your system (.NET Core redistributes it since version 1.0.0).
+or through .NET CLI utility:
+```
+$ dotnet add package NLibuv
+```
 
 
 
