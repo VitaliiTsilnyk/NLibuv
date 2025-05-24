@@ -1,5 +1,5 @@
 
-name: Dotnet Test
+name: Tests
 
 on:
   push:
