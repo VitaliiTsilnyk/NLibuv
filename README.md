@@ -1,4 +1,4 @@
-NLibuv [![Build Status](https://travis-ci.org/VitaliiTsilnyk/NLibuv.svg?branch=master)](https://travis-ci.org/VitaliiTsilnyk/NLibuv) [![Build Status](https://ci.appveyor.com/api/projects/status/4vcw8d72fvtgwuhf?svg=true)](https://ci.appveyor.com/project/VitaliiTsilnyk/nlibuv) [![NuGet](https://img.shields.io/nuget/v/NLibuv.svg?label=nuget:%20NLibuv)](https://www.nuget.org/packages/NLibuv/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE)
+NLibuv [![NuGet](https://img.shields.io/nuget/v/NLibuv.svg?label=nuget:%20NLibuv)](https://www.nuget.org/packages/NLibuv/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE)
 ========
 
 A cross-platform bindings to the [libuv library](http://libuv.org/) for .NET.
