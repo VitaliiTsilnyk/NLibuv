@@ -84,6 +84,17 @@ namespace NLibuv
 		}
 
 		/// <summary>
+		/// Enables / disables TCP keep-alive.
+		/// </summary>
+		/// <param name="enable"></param>
+		/// <param name="delay">Initial delay in seconds, ignored when enable is false.</param>
+		public void KeepAlive(bool enable, uint delay)
+		{
+			this.EnsureCallingThread();
+			Libuv.EnsureSuccess(Libuv.uv_tcp_keepalive(this, enable ? 1 : 0, delay));
+		}
+
+		/// <summary>
 		/// Establishes an IPv4 or IPv6 TCP connection.
 		/// </summary>
 		/// <param name="endPoint">Target end point.</param>
