@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>6</LangVersion>
+    <LangVersion>13</LangVersion>
     <OutputType>Exe</OutputType>
     <AssemblyName>NLibuv.Tests</AssemblyName>
     <PackageId>NLibuv.Tests</PackageId>

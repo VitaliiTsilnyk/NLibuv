@@ -3,21 +3,21 @@
   <PropertyGroup>
     <Description>A cross-platform bindings to the libuv library for .NET.</Description>
     <AssemblyTitle>NLibuv</AssemblyTitle>
-    <VersionPrefix>0.2.1</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Authors>Vitaly Zilnik</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>6</LangVersion>
+    <LangVersion>13</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>NLibuv</AssemblyName>
     <PackageId>NLibuv</PackageId>
     <PackageTags>libuv;uv;io;async</PackageTags>
-    <PackageProjectUrl>http://github.com/neris/NLibuv</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/neris/NLibuv/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>http://github.com/VitaliiTsilnyk/NLibuv</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git://github.com/neris/NLibuv</RepositoryUrl>
+    <RepositoryUrl>git://github.com/VitaliiTsilnyk/NLibuv</RepositoryUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
