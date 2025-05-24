@@ -1,4 +1,4 @@
-NLibuv [![NuGet](https://img.shields.io/nuget/v/NLibuv.svg?label=nuget:%20NLibuv)](https://www.nuget.org/packages/NLibuv/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE)
+NLibuv [![Build status](https://github.com/VitaliiTsilnyk/NLibuv/actions/workflows/dotnet-test.yml/badge.svg?branch=master)](https://github.com/VitaliiTsilnyk/NLibuv/actions) [![NuGet](https://img.shields.io/nuget/v/NLibuv.svg?label=nuget:%20NLibuv)](https://www.nuget.org/packages/NLibuv/) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE)
 ========
 
 A cross-platform bindings to the [libuv library](http://libuv.org/) for .NET.
