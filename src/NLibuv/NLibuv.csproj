@@ -15,7 +15,8 @@
     <PackageId>NLibuv</PackageId>
     <PackageTags>libuv;uv;io;async</PackageTags>
     <PackageProjectUrl>http://github.com/VitaliiTsilnyk/NLibuv</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/VitaliiTsilnyk/NLibuv/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/VitaliiTsilnyk/NLibuv</RepositoryUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
@@ -28,6 +29,10 @@
 
   <ItemGroup>
     <PackageReference Include="Libuv" Version="1.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+      <None Include="../../README.md" Pack="true" PackagePath="/"/>
   </ItemGroup>
 
 </Project>
