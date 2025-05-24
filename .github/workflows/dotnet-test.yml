@@ -1,0 +1,24 @@
+
+name: Tests
+
+on:
+  push:
+    branches: [ "master", "release" ]
+  pull_request:
+    branches: [ "master", "release" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - run: cp global.json.dist global.json
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test with the dotnet CLI
+        run: dotnet test --no-build

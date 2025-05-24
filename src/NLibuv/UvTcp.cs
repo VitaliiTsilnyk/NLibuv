@@ -42,11 +42,7 @@ namespace NLibuv
 			this.EnsureCallingThread();
 
 			SockAddr socketAddress;
-#if DOTNET_CORE
 			int namelen = Marshal.SizeOf<SockAddr>();
-#else
-			int namelen = Marshal.SizeOf(typeof(SockAddr));
-#endif
 			Libuv.EnsureSuccess(Libuv.uv_tcp_getpeername(this, out socketAddress, ref namelen));
 
 			return socketAddress.ToIpEndPoint();
@@ -61,11 +57,7 @@ namespace NLibuv
 			this.EnsureCallingThread();
 
 			SockAddr socketAddress;
-#if DOTNET_CORE
 			int namelen = Marshal.SizeOf<SockAddr>();
-#else
-			int namelen = Marshal.SizeOf(typeof(SockAddr));
-#endif
 			Libuv.EnsureSuccess(Libuv.uv_tcp_getsockname(this, out socketAddress, ref namelen));
 
 			return socketAddress.ToIpEndPoint();
@@ -89,6 +81,17 @@ namespace NLibuv
 		{
 			this.EnsureCallingThread();
 			Libuv.EnsureSuccess(Libuv.uv_tcp_nodelay(this, enable ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Enables / disables TCP keep-alive.
+		/// </summary>
+		/// <param name="enable"></param>
+		/// <param name="delay">Initial delay in seconds, ignored when enable is false.</param>
+		public void KeepAlive(bool enable, uint delay)
+		{
+			this.EnsureCallingThread();
+			Libuv.EnsureSuccess(Libuv.uv_tcp_keepalive(this, enable ? 1 : 0, delay));
 		}
 
 		/// <summary>

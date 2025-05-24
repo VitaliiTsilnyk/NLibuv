@@ -226,6 +226,9 @@ namespace NLibuv.Native
 		public static extern int uv_tcp_nodelay(UvTcp handle, int enable);
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
+		public static extern int uv_tcp_keepalive(UvTcp handle, int enable, uint delay);
+
+		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
 		public static extern int uv_tcp_connect(UvTcpConnectRequest req, UvTcp handle, ref SockAddr addr, UvConnectCallback cb);
 
 		[DllImport(LibuvName, CallingConvention = CallingConvention.Cdecl)]
